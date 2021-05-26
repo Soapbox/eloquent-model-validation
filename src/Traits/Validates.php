@@ -4,9 +4,9 @@ namespace Jaspaul\EloquentModelValidation\Traits;
 
 use Illuminate\Validation\Factory;
 use Illuminate\Container\Container;
+use Illuminate\Contracts\Support\MessageBag;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Contracts\Support\MessageProvider;
 
 trait Validates
 {
@@ -97,11 +97,11 @@ trait Validates
     }
 
     /**
-     * Returns a Message Provider containing the errors for the model validation.
+     * Returns a Message Bag containing the errors for the model validation.
      *
-     * @return \Illuminate\Contracts\Support\MessageProvider
+     * @return \Illuminate\Contracts\Support\MessageBag
      */
-    public function getErrors() : MessageProvider
+    public function getErrors() : MessageBag
     {
         return $this->getValidator()->getMessageBag();
     }
