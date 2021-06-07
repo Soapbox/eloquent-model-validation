@@ -27,17 +27,11 @@ abstract class TestCase extends Base
         $container = Container::getInstance();
 
         $container->singleton('translator', function ($container) {
-            $loader = new ArrayLoader();
-            $locale = 'en';
-
-            $trans = new Translator($loader, $locale);
-
-            return $trans;
+            return new Translator(new ArrayLoader(), 'en');
         });
 
-        $container->singleton('validator', function($container) {
-            $validator = new Factory($container['translator'], $container);
-            return $validator;
+        $container->singleton('validator', function ($container) {
+            return new Factory($container['translator'], $container);
         });
     }
 

@@ -2,13 +2,8 @@
 
 namespace Tests;
 
-use PDO;
-use Mockery;
-use PDOStatement;
 use Tests\Doubles\InvalidModel;
-use Illuminate\Database\SQLiteConnection;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Database\Eloquent\Model as EloquentModel;
 use Jaspaul\EloquentModelValidation\Contracts\Validatable;
 
@@ -23,14 +18,12 @@ class InvalidModelTest extends TestCase
 
     public function testTheInvalidModelIsInvalid()
     {
-        $model = new InvalidModel();
-        $this->assertTrue($model->isInvalid());
+        $this->assertTrue((new InvalidModel())->isInvalid());
     }
 
     public function testGetErrorsReturnsAMessageBagWithTheEmailKey()
     {
-        $model = new InvalidModel();
-        $errors = $model->getErrors();
+        $errors = (new InvalidModel())->getErrors();
 
         $this->assertFalse($errors->isEmpty());
         $this->assertTrue($errors->has('email'));
@@ -40,22 +33,19 @@ class InvalidModelTest extends TestCase
     {
         $this->expectException(ValidationException::class);
 
-        $model = new InvalidModel();
-        $model->save();
+        (new InvalidModel())->save();
     }
 
     public function testValidateThrowsAValidationException()
     {
         $this->expectException(ValidationException::class);
 
-        $model = new InvalidModel();
-        $model->validate();
+        (new InvalidModel())->validate();
     }
 
     public function testGetValidationFailureReasonsReturnsTheReasonsWhyTheValidationFailed()
     {
-        $model = new InvalidModel();
-        $reasons = $model->getValidationFailureReasons();
+        $reasons = (new InvalidModel())->getValidationFailureReasons();
 
         $this->assertTrue(array_key_exists('email', $reasons));
         $this->assertTrue(array_key_exists('Required', $reasons['email']));

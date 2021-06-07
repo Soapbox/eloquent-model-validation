@@ -2,3 +2,4 @@
 composer.lock
 tags
 build
+.phpunit.result.cache

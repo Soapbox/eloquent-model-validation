@@ -17,26 +17,22 @@ class ValidModelTest extends TestCase
 
     public function testTheValidModelIsValid()
     {
-        $model = new ValidModel();
-        $this->assertTrue($model->isValid());
+        $this->assertTrue((new ValidModel())->isValid());
     }
 
     public function testGetErrorsReturnsAnEmptyMessageBag()
     {
-        $model = new ValidModel();
-        $errors = $model->getErrors();
+        $errors = (new ValidModel())->getErrors();
         $this->assertTrue($errors->isEmpty());
     }
 
     public function testValidateDoesNotThrowAValidationException()
     {
-        $model = new ValidModel();
-        $this->assertVoid($model->validate());
+        $this->assertVoid((new ValidModel())->validate());
     }
 
     public function testGetValidationFailureReasonsReturnsAnEmptyArray()
     {
-        $model = new ValidModel();
-        $this->assertEmpty($model->getValidationFailureReasons());
+        $this->assertEmpty((new ValidModel())->getValidationFailureReasons());
     }
 }
