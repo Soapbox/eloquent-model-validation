@@ -1,15 +1,15 @@
 language: php
 
 php:
-    - 7.3
-    - 7.4
+  - 7.3
+  - 8.0
 
 before_script: composer install
 
 script:
-    - vendor/bin/phpunit
+  - vendor/bin/phpunit
 
 after_script:
-    - mkdir -p build/logs
-    - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
-    - vendor/bin/php-coveralls --exclude-no-stmt -v
+  - mkdir -p build/logs
+  - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+  - vendor/bin/php-coveralls --exclude-no-stmt -v

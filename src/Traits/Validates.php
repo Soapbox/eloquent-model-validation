@@ -41,8 +41,7 @@ trait Validates
      */
     private function getValidationFactory() : Factory
     {
-        $container = Container::getInstance();
-        return $container->make('validator');
+        return Container::getInstance()->make('validator');
     }
 
     /**
@@ -67,7 +66,7 @@ trait Validates
      */
     public function isValid() : bool
     {
-        return ! $this->isInvalid();
+        return !$this->isInvalid();
     }
 
     /**
@@ -115,11 +114,7 @@ trait Validates
     {
         $validator = $this->getValidator();
 
-        if ($validator->fails()) {
-            return $validator->failed();
-        }
-
-        return [];
+        return $validator->fails() ? $validator->failed() : [];
     }
 
     /**
